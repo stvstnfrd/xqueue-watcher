@@ -26,6 +26,16 @@ docker.shell:  ## Start a container in a bash shell
 		$(DOCKER_IMAGE_NAME):latest \
 		bash
 
+DOCKER_IMAGE_NAME=xqueue_watcher
+DOCKER_CONFIG_DIR=$(PWD)/conf.d
+
+docker:
+	docker build -t xqueue_watcher:latest .
+
+docker.run:
+	docker run -v $(DOCKER_CONFIG_DIR):/edx/etc/xqueue_watcher \
+		$(DOCKER_IMAGE_NAME):latest
+
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
 upgrade: ## Update the requirements/*.txt files with the latest packages satisfying requirements/*.in
 	pip install -q -r requirements/pip_tools.txt
