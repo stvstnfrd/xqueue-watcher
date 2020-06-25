@@ -6,26 +6,6 @@ help:  ## This.
 	| sort \
 	| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-DOCKER_IMAGE_NAME=xqueue-watcher
-DOCKER_CONFIG_DIR=$(PWD)/conf.d
-
-.PHONY: docker.build
-docker.build: ## Build the latest container image
-	docker build -t $(DOCKER_IMAGE_NAME):latest .
-
-.PHONY: docker.run
-docker.run:  ## Run the local container image
-	docker run -v $(DOCKER_CONFIG_DIR):/edx/etc/xqueue_watcher \
-		$(DOCKER_IMAGE_NAME):latest \
-	;
-
-.PHONY: docker.shell
-docker.shell:  ## Start a container in a bash shell
-	docker run -v $(DOCKER_CONFIG_DIR):/edx/etc/xqueue_watcher \
-		--rm -it --name $(DOCKER_IMAGE_NAME) \
-		$(DOCKER_IMAGE_NAME):latest \
-		bash
-
 DOCKER_IMAGE_NAME=xqueue_watcher
 DOCKER_CONFIG_DIR=$(PWD)/conf.d
 
