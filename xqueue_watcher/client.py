@@ -189,11 +189,11 @@ class XQueueClient(object):
                         num_tries)
                 else:
                     break
-        poll_interval = self.poll_interval
+
         while self.running:
             if not self.process_one():
                 jitter = random.random() * 3
-                if time.time() - self.last_submission > (self.idle_poll_interval * 3):
+                if self.idle_poll_interval and (time.time() - self.last_submission > (self.idle_poll_interval * 3)):
                     # if it's been more than 3x the idle time since last submission,
                     # go into a slower poll interval
                     time.sleep(self.idle_poll_interval + jitter)

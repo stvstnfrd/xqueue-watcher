@@ -81,7 +81,7 @@ class Manager:
 
     def configure_from_file(self, config_file):
         """
-        Configura manager from a yaml configuration file
+        Configure manager from a yaml configuration file
         """
         self.config_file = Path(config_file)
         if self.did_config_change():
@@ -212,7 +212,7 @@ class Manager:
 def main(args=None):
     import argparse
     parser = argparse.ArgumentParser(prog="xqueue_watcher", description="Run grader from settings")
-    parser.add_argument('-d', '--config_file', required=True,
+    parser.add_argument('-f', '--config_file', required=True,
                         help='yaml file to use for all configuration ')
     parser.add_argument('-e', '--quit_if_empty', required=False, action='store_true', help='Quit if configuration is empty')
     args = parser.parse_args(args)

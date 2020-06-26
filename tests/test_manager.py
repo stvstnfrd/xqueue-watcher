@@ -117,9 +117,6 @@ class ManagerTests(unittest.TestCase):
         self.assertRaises(SystemExit, self.m.shutdown)
 
     def test_wait(self):
-        # no-op
-        # self.m.wait()
-
         self.m.configure(self.config)
 
         def slow_reply(url, response, session):
@@ -160,11 +157,11 @@ class ManagerTests(unittest.TestCase):
         self.assertRaises(SystemExit, manager.main, [])
         sys.stderr.seek(0)
         err_msg = sys.stderr.read()
-        self.assertIn('usage: xqueue_watcher [-h] -d CONFIG_FILE', err_msg)
-        self.assertIn('-d/--config_file', err_msg)
+        self.assertIn('usage: xqueue_watcher [-h] -f CONFIG_FILE', err_msg)
+        self.assertIn('-f/--config_file', err_msg)
         self.assertIn('required', err_msg)
         sys.stderr = stderr
 
         mydir = Path(__file__).dirname()
-        args = ['-e', '-d', mydir / "fixtures/config/empty.yml"]
+        args = ['-e', '-f', mydir / "fixtures/config/empty.yml"]
         self.assertEqual(manager.main(args), 0)

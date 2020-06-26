@@ -7,7 +7,7 @@ This is an implementation of a polling [XQueue](https://github.com/edx/xqueue) c
 Running
 =======
 
-`python -m xqueue_watcher -d [path to settings file]`
+`python -m xqueue_watcher -f [path to settings file]`
 
 
 YAML configuration file

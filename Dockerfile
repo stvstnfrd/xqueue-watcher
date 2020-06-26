@@ -17,8 +17,9 @@ COPY conf.d/empty.yml /edx/etc/xqueue_watcher/config.yml
 COPY . /edx/app/xqueue_watcher
 
 RUN pip3 install -r /edx/app/xqueue_watcher/requirements/production.txt
+RUN pip3 install -e /edx/app/xqueue_watcher
 
-CMD python3 -m xqueue_watcher -d /edx/etc/xqueue_watcher/config.yml
+CMD python3 -m xqueue_watcher -f /edx/etc/xqueue_watcher/config.yml
 
 RUN useradd -m --shell /bin/false app
 USER app
@@ -26,4 +27,4 @@ USER app
 
 FROM openedx as edx.org
 RUN pip3 install newrelic
-CMD newrelic-admin run-program python3 -m xqueue_watcher -d /edx/etc/xqueue_watcher/config.yml
+CMD newrelic-admin run-program python3 -m xqueue_watcher -f /edx/etc/xqueue_watcher/config.yml
