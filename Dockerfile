@@ -17,6 +17,8 @@ COPY conf.d/empty.yml /edx/etc/xqueue_watcher/config.yml
 COPY . /edx/app/xqueue_watcher
 
 RUN pip3 install -r /edx/app/xqueue_watcher/requirements/production.txt
+RUN pip3 install -e /edx/app/xqueue_watcher
+RUN chmod -R a+r /edx/app/xqueue_watcher
 
 CMD python3 -m xqueue_watcher -f /edx/etc/xqueue_watcher/config.yml
 
