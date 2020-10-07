@@ -16,6 +16,7 @@ docker.build: ## Build the latest container image
 .PHONY: docker.run
 docker.run:  ## Run the local container image
 	docker run -v $(DOCKER_CONFIG_DIR):/edx/etc/xqueue_watcher \
+		--rm -it --name $(DOCKER_IMAGE_NAME) \
 		$(DOCKER_IMAGE_NAME):latest \
 	;
 
